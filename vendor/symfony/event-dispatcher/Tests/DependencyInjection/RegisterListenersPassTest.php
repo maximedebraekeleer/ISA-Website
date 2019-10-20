@@ -22,11 +22,10 @@ class RegisterListenersPassTest extends TestCase
     /**
      * Tests that event subscribers not implementing EventSubscriberInterface
      * trigger an exception.
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testEventSubscriberWithoutInterface()
     {
+        $this->expectException('InvalidArgumentException');
         $builder = new ContainerBuilder();
         $builder->register('event_dispatcher');
         $builder->register('my_event_subscriber', 'stdClass')
@@ -63,12 +62,10 @@ class RegisterListenersPassTest extends TestCase
         $this->assertEquals($expectedCalls, $eventDispatcherDefinition->getMethodCalls());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The service "foo" tagged "kernel.event_listener" must not be abstract.
-     */
     public function testAbstractEventListener()
     {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('The service "foo" tagged "kernel.event_listener" must not be abstract.');
         $container = new ContainerBuilder();
         $container->register('foo', 'stdClass')->setAbstract(true)->addTag('kernel.event_listener', []);
         $container->register('event_dispatcher', 'stdClass');
@@ -77,12 +74,10 @@ class RegisterListenersPassTest extends TestCase
         $registerListenersPass->process($container);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The service "foo" tagged "kernel.event_subscriber" must not be abstract.
-     */
     public function testAbstractEventSubscriber()
     {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('The service "foo" tagged "kernel.event_subscriber" must not be abstract.');
         $container = new ContainerBuilder();
         $container->register('foo', 'stdClass')->setAbstract(true)->addTag('kernel.event_subscriber', []);
         $container->register('event_dispatcher', 'stdClass');
@@ -128,18 +123,57 @@ class RegisterListenersPassTest extends TestCase
         $this->assertTrue($container->getDefinition('foo')->hasTag('container.hot_path'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage You have requested a non-existent parameter "subscriber.class"
-     */
     public function testEventSubscriberUnresolvableClassName()
     {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('You have requested a non-existent parameter "subscriber.class"');
         $container = new ContainerBuilder();
         $container->register('foo', '%subscriber.class%')->addTag('kernel.event_subscriber', []);
         $container->register('event_dispatcher', 'stdClass');
 
         $registerListenersPass = new RegisterListenersPass();
         $registerListenersPass->process($container);
+    }
+
+    public function testInvokableEventListener()
+    {
+        $container = new ContainerBuilder();
+        $container->register('foo', \stdClass::class)->addTag('kernel.event_listener', ['event' => 'foo.bar']);
+        $container->register('bar', InvokableListenerService::class)->addTag('kernel.event_listener', ['event' => 'foo.bar']);
+        $container->register('baz', InvokableListenerService::class)->addTag('kernel.event_listener', ['event' => 'event']);
+        $container->register('event_dispatcher', \stdClass::class);
+
+        $registerListenersPass = new RegisterListenersPass();
+        $registerListenersPass->process($container);
+
+        $definition = $container->getDefinition('event_dispatcher');
+        $expectedCalls = [
+            [
+                'addListener',
+                [
+                    'foo.bar',
+                    [new ServiceClosureArgument(new Reference('foo')), 'onFooBar'],
+                    0,
+                ],
+            ],
+            [
+                'addListener',
+                [
+                    'foo.bar',
+                    [new ServiceClosureArgument(new Reference('bar')), '__invoke'],
+                    0,
+                ],
+            ],
+            [
+                'addListener',
+                [
+                    'event',
+                    [new ServiceClosureArgument(new Reference('baz')), 'onEvent'],
+                    0,
+                ],
+            ],
+        ];
+        $this->assertEquals($expectedCalls, $definition->getMethodCalls());
     }
 }
 
@@ -150,5 +184,16 @@ class SubscriberService implements \Symfony\Component\EventDispatcher\EventSubsc
         return [
             'event' => 'onEvent',
         ];
+    }
+}
+
+class InvokableListenerService
+{
+    public function __invoke()
+    {
+    }
+
+    public function onEvent()
+    {
     }
 }
