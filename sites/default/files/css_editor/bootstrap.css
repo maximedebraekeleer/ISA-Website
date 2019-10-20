@@ -1,0 +1,45 @@
+body{
+ background: #F2F1ED; 
+}
+
+#navbar{
+ background: rgba(7,44,97, 0.9);
+}
+
+.navbar-default .navbar-nav > li > a{
+  color: white;
+}
+
+#block-bootstrap-footer .menu--footer{
+  display: flex; 
+  justify-content: space-between;
+}
+
+#block-bootstrap-footer{
+    background: rgba(7,44,97, 0.9);
+    border-radius: 4px;
+}
+
+.nav > li > a{
+ 	color: white; 
+}
+
+.nav > li > a:hover{
+  color: rgba(255,255,255,0.9);
+  background: none;
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+}
+
+.navbar-default .navbar-nav > li > a:hover{
+ color: rgba(255,255,255,0.90);
+}
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
+   color: rgba(255,255,255,0.90);
+}
+
+
+
