@@ -1,0 +1,35 @@
+/**
+ * User Profiles
+ ============================================================================ */
+
+.user {
+
+  // Status marker
+  &__status {
+    float: $flow-to;
+  }
+
+  // Title/label.
+  &__title {}
+
+  // Titel anchor in teaser view mode ect (not full).
+  &__title-link {}
+
+  .field-user--user-picture {}
+}
+
+.user--profile {
+  margin-bottom: 1.25em;
+  padding: 1.25em;
+  border-radius: $border-radius;
+}
+
+.user--is-blocked {}
+.user--is-active {}
+.user--view-mode-full {}
+
+.has-role--authenticated {}
+.has-role--administrator {}
+
+
+

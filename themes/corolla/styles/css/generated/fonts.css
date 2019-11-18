@@ -1,0 +1,7 @@
+html, body, textarea, p { font-family: "Roboto", sans-serif; }
+.site-branding__name-link { font-family: "Fira Sans", sans-serif; }
+.site-branding__slogan { font-family: "Fira Sans", sans-serif; }
+.block__title, .block-menu__title, .pane__title {  font-size: 1.5rem; line-height: 1.5; }
+h1, h2, h3, h4, .h1, .h2, .h3, .h4 { font-family: "Fira Sans", sans-serif; }
+
+
