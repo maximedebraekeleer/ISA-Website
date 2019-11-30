@@ -51,6 +51,28 @@ pre {
   border-bottom-color: #0057b2;
 }
 
+#footer {
+  background-color: #0057b2;
+}
+
+#footer a {
+  color: white;
+}
+
+ul.menu li a {
+  display: inline;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+ul.menu li {
+  display: inline;
+}
+
+#block-footer-menu {
+  display: none;
+}
+
 /* base: layout */
 #pre-header,
 #header-top {
@@ -329,6 +351,11 @@ table th {
 @media (min-width: 481px) {
   .nav-tabs>li.active>a:after {
     color: #0095ff;
+  }
+
+  ul.menu li a {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 
