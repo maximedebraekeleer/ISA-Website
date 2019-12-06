@@ -1,0 +1,32 @@
+--- b/uc_product/uc_product.libraries.yml
++++ a/uc_product/uc_product.libraries.yml
+@@ -3,10 +3,9 @@ uc_product.styles:
+     theme:
+       css/uc_product.css: {}
+ 
+-uc_product.content_types:
++uc_product.scripts:
+   js:
+-    js/content_types.js: {}
++    js/uc_product.js: {}
+   dependencies:
+     - core/jquery
+     - core/drupal
+-    - core/drupal.form
+--- b/uc_product/uc_product.routing.yml
++++ a/uc_product/uc_product.routing.yml
+@@ -14,14 +14,6 @@ uc_product.classes:
+   requirements:
+     _permission: 'administer product classes'
+ 
+-uc_product.classes.add:
+-  path: '/admin/store/products/classes/add'
+-  defaults:
+-    _form: '\Drupal\uc_product\Form\ProductClassAddForm'
+-    _title: 'Add product class'
+-  requirements:
+-    _permission: 'administer product classes'
+-
+ uc_product.settings:
+   path: '/admin/store/config/products'
+   defaults:
