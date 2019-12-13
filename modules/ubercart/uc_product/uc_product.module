@@ -342,7 +342,7 @@ function uc_product_form_node_type_form_alter(&$form, FormStateInterface $form_s
     '#tree' => TRUE,
     '#attached' => array(
       'library' => array(
-        'uc_product/uc_product.scripts',
+        'uc_product/uc_product.content_types',
       ),
     ),
   );
@@ -396,6 +396,7 @@ function uc_product_form_node_type_form_builder($entity_type, NodeTypeInterface 
   $type->setThirdPartySetting('uc_product', 'product', (bool) $form_state->getValue(array('uc_product', 'product')));
   $type->setThirdPartySetting('uc_product', 'shippable', (bool) $form_state->getValue(array('uc_product', 'shippable')));
   $type->setThirdPartySetting('uc_product', 'image_field', $form_state->getValue(array('uc_product', 'image_field')));
+  $type->set('description', $type->getDescription() . t('<br /><em>This type is an Ubercart Product</em>'));
 }
 
 /**

@@ -3,9 +3,10 @@ uc_product.styles:
     theme:
       css/uc_product.css: {}
 
-uc_product.scripts:
+uc_product.content_types:
   js:
-    js/uc_product.js: {}
+    js/content_types.js: {}
   dependencies:
     - core/jquery
     - core/drupal
+    - core/drupal.form

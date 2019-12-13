@@ -1,0 +1,5 @@
+uc_product.classes_add:
+  route_name: uc_product.classes.add
+  title: 'Add new product class'
+  appears_on:
+    - uc_product.classes

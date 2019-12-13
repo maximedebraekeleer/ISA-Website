@@ -1,8 +1,0 @@
---- b/uc_product/uc_product.links.action.yml
-+++ b/uc_product/uc_product.links.action.yml
-@@ -1,5 +0,0 @@
--uc_product.classes_add:
--  route_name: uc_product.classes.add
--  title: 'Add new product class'
--  appears_on:
--    - uc_product.classes
