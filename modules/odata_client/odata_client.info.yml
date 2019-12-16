@@ -1,0 +1,10 @@
+name: 'Odata Client'
+type: module
+description: 'Connection to OData server.'
+core: 8.x
+package: 'Web services'
+
+# Information added by Drupal.org packaging script on 2019-10-21
+version: '8.x-1.0-alpha1'
+project: 'odata_client'
+datestamp: 1571642893
