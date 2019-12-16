@@ -1,0 +1,11 @@
+name: 'User Agent Class'
+type: module
+description: 'Device & Browser Detect Class'
+# core: 8.x
+package: 'Custom'
+
+# Information added by Drupal.org packaging script on 2018-11-17
+version: '8.x-4.5'
+core: '8.x'
+project: 'user_agent_class'
+datestamp: 1542465191
