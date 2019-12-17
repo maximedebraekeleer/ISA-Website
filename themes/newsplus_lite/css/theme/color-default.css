@@ -28,6 +28,10 @@ rgb-light: 192,39,60
   padding: 0px;
 }
 
+.views-view-grid .views-col {
+  padding: 7px;
+}
+
 /* #block-languageswitcher-2 > div > div > ul > li > a {
   background-color: rgba(255, 0, 34, 0) !important;
 } */
