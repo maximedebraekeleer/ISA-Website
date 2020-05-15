@@ -779,8 +779,8 @@ $settings['entity_update_backup'] = TRUE;
 # }
 $databases['default']['default'] = array (
   'database' => 'drupal',
-  'username' => 'root',
-  'password' => '',
+  'username' => 'user',
+  'password' => 'user',
   'prefix' => '',
   'host' => 'localhost',
   'port' => '3306',
